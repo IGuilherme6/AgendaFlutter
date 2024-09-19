@@ -50,7 +50,7 @@ class Editar extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(onPressed: () {
-
+                  //adicionar edição de contato
                 },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
@@ -61,7 +61,7 @@ class Editar extends StatelessWidget{
                     child: Text("Editar")),
               ),
               ElevatedButton(onPressed: () {
-
+                //adicionar remoção de contato
               },
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
