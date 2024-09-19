@@ -4,9 +4,9 @@ import 'dart:ffi';
 
 class Contatos {
 
-  late String nome;
-  late String telefone;
-  late String email;
+  final String nome;
+  final String telefone;
+  final String email;
 
   Contatos({required this.nome,required this.email,required this.telefone});
 
