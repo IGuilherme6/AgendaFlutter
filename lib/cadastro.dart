@@ -49,9 +49,7 @@ class Cadastro extends StatelessWidget {
                       nome: controleNome.text,
                       email: controleEmail.text,
                       telefone: controleTelefone.text);
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Tela())
-                  );
+                  Navigator.pop(context,novoContato);
                 },
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
