@@ -15,9 +15,9 @@ class Tela extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Cadastro()));            },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.purple, // Cor do texto
+              backgroundColor: Colors.purple,
               padding: EdgeInsets.symmetric(
-                  horizontal: 32, vertical: 16), // Padding interno
+                  horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30), // Borda arredondada
               ),
