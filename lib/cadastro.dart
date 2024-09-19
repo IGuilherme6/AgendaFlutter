@@ -45,12 +45,14 @@ class Cadastro extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
                 onPressed: () {
-                  Contatos novoContato = Contatos(
-                      nome: controleNome.text,
-                      email: controleEmail.text,
-                      telefone: controleTelefone.text);
-                  Navigator.pop(context,novoContato);
+                  Map<String, String> Contato = {
+                    "nome" : controleNome.text,
+                    "email" : controleEmail.text,
+                    "telefone" : controleTelefone.text,
+                  };
+                  Navigator.pop(context, Contato);
                 },
+
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.purple,
