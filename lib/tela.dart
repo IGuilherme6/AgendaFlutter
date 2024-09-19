@@ -1,7 +1,14 @@
-import 'package:atividadep1/cadastro.dart';
 import 'package:flutter/material.dart';
+import 'cadastro.dart';
 
-class Tela extends StatelessWidget {
+class Tela extends StatefulWidget {
+  @override
+  _TelaEstado createState() => _TelaEstado();
+}
+
+class _TelaEstado extends State<Tela> {
+  List<Map<String, String>> contatos = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,32 +18,42 @@ class Tela extends StatelessWidget {
       body: Column(children: [
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Cadastro()));            },
+            onPressed: () async {
+              final contato = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Cadastro()),
+              );
+
+              // Verificar se foi retornado algum contato e adicioná-lo à lista
+              if (contato != null) {
+                setState(() {
+                  contatos.add(contato);
+                });
+              }
+            },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: Colors.purple,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 32, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30), // Borda arredondada
               ),
             ),
             child: Text("Novo contato"),
-          ),
-          ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.purple,
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              child: Text("Listar"))
+          )
         ]),
-        Expanded(child: ListView(
-
-        ))
+        Expanded(
+          child: ListView.builder(
+            itemCount: contatos.length,
+            itemBuilder: (context, index) {
+              final contato = contatos[index];
+              return ListTile(
+                title: Text(contato["nome"]!),
+                subtitle: Text("Telefone: ${contato["telefone"]} \nEmail: ${contato["email"]}"),
+              );
+            },
+          ),
+        ),
       ]),
     );
   }
