@@ -1,3 +1,4 @@
+import 'package:atividadep1/edicao.dart';
 import 'package:flutter/material.dart';
 import 'cadastro.dart';
 
@@ -49,7 +50,12 @@ class _TelaEstado extends State<Tela> {
               final contato = contatos[index];
               return ListTile(
                 title: Text(contato["nome"]!),
-                subtitle: Text("Telefone: ${contato["telefone"]} \nEmail: ${contato["email"]}"),
+                subtitle: Text(
+                    "Telefone: ${contato["telefone"]} \nEmail: ${contato['email']}"
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Editar(contato: contato),));
+                },
               );
             },
           ),
