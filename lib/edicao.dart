@@ -53,7 +53,26 @@ class Editar extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(onPressed: () {
-                  //adicionar edição de contato
+                  if(!(nomeController.text.isEmpty && telefoneController.text.isEmpty && emailController.text.isEmpty)) {
+                    Contato c = new Contato(nome: nomeController.text,
+                        email: emailController.text,
+                        telefone: telefoneController.text);
+                    contatos.removerContato(contato);
+                    contatos.addContato(c);
+                    Navigator.pop(context, c);
+                  }else{
+                    showDialog(context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text("Campos incompletos"),
+                            actions: [
+                              TextButton(onPressed: () {
+                                Navigator.of(context).pop();
+                              }, child: Text("OK"))
+                            ],
+                          );
+                        });
+                  }
                 },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
@@ -64,7 +83,8 @@ class Editar extends StatelessWidget{
                     child: Text("Editar")),
               ),
               ElevatedButton(onPressed: () {
-                //adicionar remoção de contato
+                contatos.removerContato(contato);
+                Navigator.pop(context);
 
               },
                   style: ElevatedButton.styleFrom(

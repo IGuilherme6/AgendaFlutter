@@ -12,4 +12,8 @@ class Contatosrepositorio {
   List<Contato> getContato() {
     return contatos;
   }
+
+  void removerContato(Contato c){
+    contatos.remove(c);
+  }
 }

@@ -19,6 +19,7 @@ class TelaEstado extends State<Tela> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Center(child: Text('Agenda')),
       ),
@@ -33,13 +34,8 @@ class TelaEstado extends State<Tela> {
                       contatos: contatos,
                     ),
                   ));
-
               // Verificar se foi retornado algum contato e adicioná-lo à lista
-              if (contato != null) {
-                setState(() {
-                  contatos.addContato(contato);
-                });
-              }
+              setState(() {});
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
@@ -70,7 +66,14 @@ class TelaEstado extends State<Tela> {
                               contato, // Agora é um objeto Contato, não um Map<String, String>
                           contatos: contatos,
                         ),
-                      ));
+
+                      )
+
+                  ).then((_){
+                    setState(() {
+                    });
+                  }
+                  );
                 },
               );
             },
