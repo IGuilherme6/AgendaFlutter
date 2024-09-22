@@ -1,16 +1,19 @@
 
+import 'package:atividadep1/contato.dart';
+import 'package:atividadep1/contatosRepositorio.dart';
 import 'package:flutter/material.dart';
 
 
 class Editar extends StatelessWidget{
-  final Map<String, String> contato;
+  final Contato contato;
+  final Contatosrepositorio contatos;
+  Editar({required this.contatos, required this.contato});
 
-  Editar({required this.contato});
   @override
   Widget build(BuildContext context) {
-    final nomeController = TextEditingController(text: contato["nome"]);
-    final telefoneController = TextEditingController(text: contato["telefone"]);
-    final emailController = TextEditingController(text: contato["email"]);
+    final nomeController = TextEditingController(text: contato.nome);
+    final telefoneController = TextEditingController(text: contato.telefone);
+    final emailController = TextEditingController(text: contato.email);
     return Scaffold(
       appBar: AppBar(title: Text("Novo contato")),
       body: Column(
@@ -62,6 +65,7 @@ class Editar extends StatelessWidget{
               ),
               ElevatedButton(onPressed: () {
                 //adicionar remoção de contato
+
               },
                   style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,

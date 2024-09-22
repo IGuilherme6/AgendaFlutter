@@ -1,14 +1,20 @@
+import 'package:atividadep1/contato.dart';
 import 'package:atividadep1/edicao.dart';
 import 'package:flutter/material.dart';
 import 'cadastro.dart';
+import 'package:atividadep1/contatosRepositorio.dart';
 
 class Tela extends StatefulWidget {
+  final Contatosrepositorio contatos;
+  Tela({required this.contatos});
+
   @override
-  _TelaEstado createState() => _TelaEstado();
+  TelaEstado createState() => TelaEstado(contatos: contatos);
 }
 
-class _TelaEstado extends State<Tela> {
-  List<Map<String, String>> contatos = [];
+class TelaEstado extends State<Tela> {
+  final Contatosrepositorio contatos;
+  TelaEstado({required this.contatos});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +27,17 @@ class _TelaEstado extends State<Tela> {
           ElevatedButton(
             onPressed: () async {
               final contato = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Cadastro()),
-              );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Cadastro(
+                      contatos: contatos,
+                    ),
+                  ));
 
               // Verificar se foi retornado algum contato e adicioná-lo à lista
               if (contato != null) {
                 setState(() {
-                  contatos.add(contato);
+                  contatos.addContato(contato);
                 });
               }
             },
@@ -45,16 +54,23 @@ class _TelaEstado extends State<Tela> {
         ]),
         Expanded(
           child: ListView.builder(
-            itemCount: contatos.length,
+            itemCount: contatos.getContato().length,
             itemBuilder: (context, index) {
-              final contato = contatos[index];
+              Contato contato = contatos.getContato()[index];
               return ListTile(
-                title: Text(contato["nome"]!),
+                title: Text(contato.nome),
                 subtitle: Text(
-                    "Telefone: ${contato["telefone"]} \nEmail: ${contato['email']}"
-                ),
+                    "Telefone: ${contato.telefone} \nEmail: ${contato.email}"),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Editar(contato: contato),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Editar(
+                          contato:
+                              contato, // Agora é um objeto Contato, não um Map<String, String>
+                          contatos: contatos,
+                        ),
+                      ));
                 },
               );
             },

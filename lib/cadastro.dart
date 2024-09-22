@@ -1,12 +1,16 @@
-import 'package:atividadep1/contatos.dart';
+import 'package:atividadep1/contato.dart';
 import 'package:atividadep1/tela.dart';
 import 'package:flutter/material.dart';
+import 'package:atividadep1/contatosRepositorio.dart';
 
 class Cadastro extends StatelessWidget {
 
   final TextEditingController controleNome = new TextEditingController();
   final TextEditingController controleTelefone = new TextEditingController();
   final TextEditingController controleEmail = new TextEditingController();
+  final Contatosrepositorio contatos;
+
+  Cadastro({required this.contatos});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +49,10 @@ class Cadastro extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
                 onPressed: () {
-                  Map<String, String> Contato = {
-                    "nome" : controleNome.text,
-                    "email" : controleEmail.text,
-                    "telefone" : controleTelefone.text,
-                  };
-                  Navigator.pop(context, Contato);
+                 Contato c = new Contato(nome: controleNome.text, email: controleEmail.text, telefone: controleTelefone.text);
+                 contatos.addContato(c);
+                  Navigator.pop(context, c);
                 },
-
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.purple,
