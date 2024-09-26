@@ -10,8 +10,6 @@ class Contato {
 
   Contato({required this.nome,required this.email,required this.telefone});
 
-  VerificaTelefone(){
-    
-  }
+
 }
 

@@ -1,6 +1,7 @@
 
 import 'package:atividadep1/contato.dart';
 import 'package:atividadep1/contatosRepositorio.dart';
+import 'package:atividadep1/validadores.dart';
 import 'package:flutter/material.dart';
 
 
@@ -53,7 +54,8 @@ class Editar extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(onPressed: () {
-                  if(!(nomeController.text.isEmpty && telefoneController.text.isEmpty && emailController.text.isEmpty)) {
+                  Validador v = new Validador();
+                  if(((!nomeController.text.isEmpty) && v.VerificaTelefone(telefoneController.text) && v.validarEmail(emailController.text))) {
                     Contato c = new Contato(nome: nomeController.text,
                         email: emailController.text,
                         telefone: telefoneController.text);
@@ -64,7 +66,7 @@ class Editar extends StatelessWidget{
                     showDialog(context: context,
                         builder: (BuildContext context){
                           return AlertDialog(
-                            title: Text("Campos incompletos"),
+                            title: Text("Campos incompletos ou incorretos"),
                             actions: [
                               TextButton(onPressed: () {
                                 Navigator.of(context).pop();
@@ -80,7 +82,7 @@ class Editar extends StatelessWidget{
                         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30))),
-                    child: Text("Editar")),
+                    child: Text("Salvar")),
               ),
               ElevatedButton(onPressed: () {
                 contatos.removerContato(contato);

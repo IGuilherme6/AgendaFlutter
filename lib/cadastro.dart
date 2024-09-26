@@ -1,5 +1,6 @@
 import 'package:atividadep1/contato.dart';
 import 'package:atividadep1/tela.dart';
+import 'package:atividadep1/validadores.dart';
 import 'package:flutter/material.dart';
 import 'package:atividadep1/contatosRepositorio.dart';
 
@@ -32,6 +33,7 @@ class Cadastro extends StatelessWidget {
             child:  TextField(
               decoration: InputDecoration(
                   label: Text("Telefone"),
+                  hintText: '(XX) 9XXXX-XXXX',
                   border: OutlineInputBorder()),
                   controller: controleTelefone,
             ),
@@ -49,7 +51,8 @@ class Cadastro extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
                 onPressed: () {
-                  if(!(controleNome.text.isEmpty && controleTelefone.text.isEmpty && controleEmail.text.isEmpty)) {
+                  Validador v = new Validador();
+                  if(((!controleNome.text.isEmpty) && v.VerificaTelefone(controleTelefone.text) && v.validarEmail(controleEmail.text))) {
                     Contato c = new Contato(nome: controleNome.text,
                         email: controleEmail.text,
                         telefone: controleTelefone.text);
