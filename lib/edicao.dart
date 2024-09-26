@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 
 class Editar extends StatelessWidget{
-  final Contato contato;
-  final Contatosrepositorio contatos;
+  final Contato contato;// O contato que está sendo editado
+  final Contatosrepositorio contatos;// O repositório de contatos
   Editar({required this.contatos, required this.contato});
 
   @override
@@ -16,7 +16,7 @@ class Editar extends StatelessWidget{
     final telefoneController = TextEditingController(text: contato.telefone);
     final emailController = TextEditingController(text: contato.email);
     return Scaffold(
-      appBar: AppBar(title: Text("Novo contato")),
+      appBar: AppBar(title: Text("Novo contato")),// Título
       body: Column(
         children: [
           Padding(
@@ -54,15 +54,20 @@ class Editar extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(onPressed: () {
+                  // Valida os campos antes de salvar
                   Validador v = new Validador();
                   if(((!nomeController.text.isEmpty) && v.VerificaTelefone(telefoneController.text) && v.validarEmail(emailController.text))) {
+
+                    // Cria um novo contato com os dados editados
                     Contato c = new Contato(nome: nomeController.text,
                         email: emailController.text,
                         telefone: telefoneController.text);
+                    // Remove o contato antigo e adiciona o contato novo, não consegui fazer uma edição real
                     contatos.removerContato(contato);
                     contatos.addContato(c);
                     Navigator.pop(context, c);
                   }else{
+                    // Se os dados forem inválidos, mostra um alerta
                     showDialog(context: context,
                         builder: (BuildContext context){
                           return AlertDialog(
@@ -84,7 +89,8 @@ class Editar extends StatelessWidget{
                             borderRadius: BorderRadius.circular(30))),
                     child: Text("Salvar")),
               ),
-              ElevatedButton(onPressed: () {
+              ElevatedButton(onPressed: () {  // Botão de deletar o contato
+                // Remove o contato e volta para a tela anterior
                 contatos.removerContato(contato);
                 Navigator.pop(context);
 

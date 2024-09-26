@@ -5,38 +5,39 @@ import 'cadastro.dart';
 import 'package:atividadep1/contatosRepositorio.dart';
 
 class Tela extends StatefulWidget {
-  final Contatosrepositorio contatos;
-  Tela({required this.contatos});
+  final Contatosrepositorio contatos;// Recebe uma instância do repositório de contatos
+  Tela({required this.contatos});// Construtor que espera o repositório como parâmetro
 
   @override
-  TelaEstado createState() => TelaEstado(contatos: contatos);
+  TelaEstado createState() => TelaEstado(contatos: contatos);// Cria o estado do widget Tela
 }
 
 class TelaEstado extends State<Tela> {
-  final Contatosrepositorio contatos;
-  TelaEstado({required this.contatos});
+  final Contatosrepositorio contatos;// Guarda a referência ao repositório de contatos
+  TelaEstado({required this.contatos});// Construtor do estado, recebendo o repositório
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: Center(child: Text('Agenda')),
+        title: Center(child: Text('Agenda')),// Título
       ),
       body: Column(children: [
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           ElevatedButton(
             onPressed: () async {
-              final contato = await Navigator.push(
+              final contato = await Navigator.push(// Quando o botão é pressionado, navega para a tela de cadastro
                   context,
                   MaterialPageRoute(
                     builder: (context) => Cadastro(
-                      contatos: contatos,
+                      contatos: contatos,// Passa o repositório de contatos para a tela de cadastro
                     ),
                   ));
               // Verificar se foi retornado algum contato e adicioná-lo à lista
-              setState(() {});
+              setState(() {});// Após o cadastro, atualiza a tela (mesmo que não adicione um contato)
             },
+            // Estilização do botão
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: Colors.purple,
@@ -48,28 +49,30 @@ class TelaEstado extends State<Tela> {
             child: Text("Novo contato"),
           )
         ]),
-        Expanded(
+        Expanded(// Lista que vai preencher o espaço disponível
           child: ListView.builder(
-            itemCount: contatos.getContato().length,
+            itemCount: contatos.getContato().length,// Pega o número de contatos
             itemBuilder: (context, index) {
-              Contato contato = contatos.getContato()[index];
+              // Monta cada item da lista
+              Contato contato = contatos.getContato()[index];// Pega o contato da lista pelo índice
               return ListTile(
                 title: Text(contato.nome),
                 subtitle: Text(
                     "Telefone: ${contato.telefone} \nEmail: ${contato.email}"),
-                onTap: () {
+                onTap: () { // Quando o usuário clica no contato, vai para a tela de edição
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Editar(
                           contato:
-                              contato, // Agora é um objeto Contato, não um Map<String, String>
-                          contatos: contatos,
+                              contato, // Passa o contato que foi clicado
+                          contatos: contatos,  // Passa o repositório para a tela de edição
                         ),
 
                       )
 
                   ).then((_){
+                    // Quando volta da tela de edição, atualiza a lista
                     setState(() {
                     });
                   }

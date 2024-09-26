@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final contatosRepositorio = Contatosrepositorio();
     return MaterialApp(
-      home: Tela(contatos: contatosRepositorio,),
+      home: Tela(contatos: contatosRepositorio,),//chama somente tela
     );
   }
 }
