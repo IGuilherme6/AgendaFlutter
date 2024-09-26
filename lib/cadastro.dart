@@ -6,6 +6,7 @@ import 'package:atividadep1/contatosRepositorio.dart';
 
 class Cadastro extends StatelessWidget {
 
+// Controladores de texto para capturar o que o usuário digita
   final TextEditingController controleNome = new TextEditingController();
   final TextEditingController controleTelefone = new TextEditingController();
   final TextEditingController controleEmail = new TextEditingController();
@@ -51,14 +52,19 @@ class Cadastro extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
                 onPressed: () {
+                  // Cria um validador para verificar os campos
                   Validador v = new Validador();
+                  // Verifica se o nome não está vazio, se o telefone é válido e se o email é válido
                   if(((!controleNome.text.isEmpty) && v.VerificaTelefone(controleTelefone.text) && v.validarEmail(controleEmail.text))) {
+                    // Cria um novo contato com os dados fornecidos
                     Contato c = new Contato(nome: controleNome.text,
                         email: controleEmail.text,
                         telefone: controleTelefone.text);
                     contatos.addContato(c);
+                    // Volta para a tela anterior, passando o novo contato como retorno
                     Navigator.pop(context, c);
                   }else{
+                    // Se algum campo estiver inválido, exibe um alerta
                     showDialog(context: context,
                         builder: (BuildContext context){
                           return AlertDialog(
@@ -72,7 +78,7 @@ class Cadastro extends StatelessWidget {
                         });
                   }
                 },
-                style: ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom( // Estilização do botão de salvar
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.purple,
                     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),

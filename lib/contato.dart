@@ -2,7 +2,7 @@
 
 import 'dart:ffi';
 
-class Contato {
+class Contato {//classe contato
 
   final String nome;
   final String telefone;

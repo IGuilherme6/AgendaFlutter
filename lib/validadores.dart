@@ -1,6 +1,6 @@
 
 
-class Validador{
+class Validador{ //classe para validar o numero de telefone e o email
 
   bool VerificaTelefone(String telefone){
     if(telefone.isEmpty){

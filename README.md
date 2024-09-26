@@ -1,16 +1,13 @@
-# atividadep1
 
-Projeto P1, agenda em flutter
+# Agenda de Contatos P1
 
-## Getting Started
+Este é um aplicativo de agenda de contatos simples, que permite adicionar, editar e excluir contatos de forma fácil e rápida.
+Ao abrir o aplicativo, você verá a lista de contatos salvos, e caso não haja nenhum contato, a lista estará vazia, aguardando novos cadastros.
+Para adicionar um contato, basta clicar no botão "Novo Contato", onde você será levado a uma nova tela para preencher as informações 
+de nome, telefone e email. O telefone deve ser inserido no formato (XX) 9XXXX-XXXX e o email deve ser válido. Depois de preencher os campos corretamente,
+basta clicar em "Salvar" para que o novo contato seja adicionado à lista.
 
-This project is a starting point for a Flutter application.
+Se você quiser editar um contato já existente, basta clicar no nome do contato na lista principal, e você será redirecionado para uma tela de edição,
+onde pode modificar o nome, o telefone ou o email. Após realizar as alterações, clique novamente em "Salvar" para atualizar o contato na agenda.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Além disso, se desejar excluir um contato, também é possível fazer isso a partir da tela de edição. Há um botão "Deletar" que remove o contato da lista.
